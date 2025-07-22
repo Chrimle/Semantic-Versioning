@@ -7,7 +7,7 @@
     <!-- === Project Coordinates === -->
     <groupId>io.github.chrimle</groupId>
     <artifactId>semantic-versioning</artifactId>
-    <version>0.0.0</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <!-- === Project Metadata === -->
@@ -78,10 +78,30 @@
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
         <!-- === Dependency Versions === -->
+        <apiguardian-api.version>1.1.2</apiguardian-api.version>
+        <jetbrains-annotations.version>13.0</jetbrains-annotations.version>
+        <junit-jupiter.version>5.12.2</junit-jupiter.version>
     </properties>
 
     <!-- === Dependencies === -->
-    <dependencies/>
+    <dependencies>
+        <dependency>
+            <groupId>org.apiguardian</groupId>
+            <artifactId>apiguardian-api</artifactId>
+            <version>${apiguardian-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${jetbrains-annotations.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <!-- === Build Plugins === -->
     <build>
