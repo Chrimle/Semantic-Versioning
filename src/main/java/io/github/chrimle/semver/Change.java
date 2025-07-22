@@ -8,7 +8,7 @@ import org.apiguardian.api.API;
  * @since 1.0.0
  * @author Chrimle
  */
-@API(status = API.Status.STABLE, since = "1.0.0")
+@API(status = API.Status.STABLE, since = "1.0.1")
 public enum Change {
   /**
    * <strong>MAJOR</strong> change.

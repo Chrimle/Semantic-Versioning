@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
  * @since 1.0.0
  * @author Chrimle
  */
-@API(status = API.Status.STABLE, since = "1.0.0")
+@API(status = API.Status.STABLE, since = "1.0.1")
 public record SemVer(int major, int minor, int patch) {
 
   /**
