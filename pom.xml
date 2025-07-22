@@ -7,7 +7,7 @@
     <!-- === Project Coordinates === -->
     <groupId>io.github.chrimle</groupId>
     <artifactId>semantic-versioning</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
     <!-- === Project Metadata === -->
@@ -105,6 +105,15 @@
 
     <!-- === Build Plugins === -->
     <build>
+        <resources>
+            <resource>
+                <directory>${basedir}</directory>
+                <includes>
+                    <include>LICENSE</include>
+                </includes>
+                <targetPath>META-INF</targetPath>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
