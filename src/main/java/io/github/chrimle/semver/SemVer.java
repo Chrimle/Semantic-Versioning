@@ -1,5 +1,6 @@
 package io.github.chrimle.semver;
 
+import org.apiguardian.api.API;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
  * @since 1.0.0
  * @author Chrimle
  */
+@API(status = API.Status.STABLE, since = "1.0.0")
 public record SemVer(int major, int minor, int patch) {
 
   /**
