@@ -14,7 +14,7 @@ class SemVerTest {
     void testNegativeThrows() {
       final var exception =
           assertThrows(IllegalArgumentException.class, () -> new SemVer(-1, 0, 0));
-      assertEquals("`major` MUST NOT be negative", exception.getMessage());
+      assertEquals("`major` MUST be at least `0`", exception.getMessage());
     }
 
     @Test
@@ -39,7 +39,7 @@ class SemVerTest {
     void testNegativeThrows() {
       final var exception =
           assertThrows(IllegalArgumentException.class, () -> new SemVer(0, -1, 0));
-      assertEquals("`minor` MUST NOT be negative", exception.getMessage());
+      assertEquals("`minor` MUST be at least `0`", exception.getMessage());
     }
 
     @Test
@@ -64,7 +64,7 @@ class SemVerTest {
     void testNegativeThrows() {
       final var exception =
           assertThrows(IllegalArgumentException.class, () -> new SemVer(0, 0, -1));
-      assertEquals("`patch` MUST NOT be negative", exception.getMessage());
+      assertEquals("`patch` MUST be at least `0`", exception.getMessage());
     }
 
     @Test
