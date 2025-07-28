@@ -1,5 +1,9 @@
 package io.github.chrimle.semver;
 
+import static io.github.chrimle.exceptionfactory.ExceptionFactory.illegalArgumentOf;
+import static io.github.chrimle.exceptionfactory.MessageTemplates.OneArgTemplate.*;
+import static io.github.chrimle.exceptionfactory.MessageTemplates.TwoArgTemplate.MUST_BE_AT_LEAST;
+
 import org.apiguardian.api.API;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -30,9 +34,9 @@ public record SemVer(int major, int minor, int patch) {
    * @since 1.0.0
    */
   public SemVer {
-    if (major < 0) throw new IllegalArgumentException("`major` MUST NOT be negative");
-    if (minor < 0) throw new IllegalArgumentException("`minor` MUST NOT be negative");
-    if (patch < 0) throw new IllegalArgumentException("`patch` MUST NOT be negative");
+    if (major < 0) throw illegalArgumentOf("major", MUST_BE_AT_LEAST, "0");
+    if (minor < 0) throw illegalArgumentOf("minor", MUST_BE_AT_LEAST, "0");
+    if (patch < 0) throw illegalArgumentOf("patch", MUST_BE_AT_LEAST, "0");
   }
 
   /**
@@ -45,7 +49,7 @@ public record SemVer(int major, int minor, int patch) {
    */
   @Contract("null -> fail")
   public SemVer incrementVersion(final Change change) {
-    if (change == null) throw new IllegalArgumentException("`change` MUST NOT be `null`");
+    if (change == null) throw illegalArgumentOf("change", MUST_NOT_BE_NULL);
     return switch (change) {
       case MAJOR -> incrementMajor();
       case MINOR -> incrementMinor();
