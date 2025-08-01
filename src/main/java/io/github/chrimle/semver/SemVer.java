@@ -4,6 +4,7 @@ import static io.github.chrimle.exceptionfactory.ExceptionFactory.illegalArgumen
 import static io.github.chrimle.exceptionfactory.MessageTemplates.OneArgTemplate.*;
 import static io.github.chrimle.exceptionfactory.MessageTemplates.TwoArgTemplate.MUST_BE_AT_LEAST;
 
+import io.github.chrimle.exceptionfactory.ExceptionBuilder;
 import org.apiguardian.api.API;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Chrimle
  */
 @API(status = API.Status.STABLE, since = "1.0.1")
-public record SemVer(int major, int minor, int patch) {
+public record SemVer(int major, int minor, int patch) implements Comparable<SemVer> {
 
   /**
    * Constructs a <em>valid</em> {@link SemVer} instance.
@@ -130,5 +131,29 @@ public record SemVer(int major, int minor, int patch) {
       return "v%d.%d".formatted(major, minor);
     }
     return "v%d".formatted(major);
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @throws NullPointerException if {@code other} is {@code null}.
+   * @since 1.1.0
+   */
+  @Override
+  public int compareTo(final SemVer other) {
+    if (other == null) {
+      throw ExceptionBuilder.of(NullPointerException.class)
+          .setMessage(MUST_NOT_BE_NULL, "other")
+          .build();
+    }
+    int result = Integer.compare(this.major(), other.major());
+    if (result != 0) {
+      return result;
+    }
+    result = Integer.compare(this.minor(), other.minor());
+    if (result != 0) {
+      return result;
+    }
+    return Integer.compare(this.patch(), other.patch());
   }
 }

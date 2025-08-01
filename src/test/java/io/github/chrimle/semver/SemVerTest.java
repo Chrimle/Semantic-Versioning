@@ -124,4 +124,55 @@ class SemVerTest {
       assertEquals("v1.2.3", semVer.toShortVersionString());
     }
   }
+
+  @Nested
+  class CompareToTests {
+    @Test
+    void testNull() {
+      final var semVer = new SemVer(1, 2, 3);
+      assertThrows(IllegalArgumentException.class, () -> semVer.compareTo(null));
+    }
+
+    @Test
+    void testSelf() {
+      final var self = new SemVer(1, 2, 3);
+      assertEquals(0, self.compareTo(self));
+    }
+
+    @Test
+    void testEqual() {
+      final var left = new SemVer(1, 2, 3);
+      final var right = new SemVer(1, 2, 3);
+      assertEquals(left.compareTo(right), right.compareTo(left));
+      assertEquals(0, left.compareTo(right));
+      assertEquals(0, right.compareTo(left));
+    }
+
+    @Test
+    void testUnequalMajor() {
+      final var left = new SemVer(3, 2, 3);
+      final var right = new SemVer(1, 2, 3);
+      assertEquals(left.compareTo(right), -right.compareTo(left));
+      assertEquals(1, left.compareTo(right));
+      assertEquals(-1, right.compareTo(left));
+    }
+
+    @Test
+    void testUnequalMinor() {
+      final var left = new SemVer(1, 3, 3);
+      final var right = new SemVer(1, 2, 3);
+      assertEquals(left.compareTo(right), -right.compareTo(left));
+      assertEquals(1, left.compareTo(right));
+      assertEquals(-1, right.compareTo(left));
+    }
+
+    @Test
+    void testUnequalPatch() {
+      final var left = new SemVer(1, 2, 4);
+      final var right = new SemVer(1, 2, 3);
+      assertEquals(left.compareTo(right), -right.compareTo(left));
+      assertEquals(1, left.compareTo(right));
+      assertEquals(-1, right.compareTo(left));
+    }
+  }
 }
