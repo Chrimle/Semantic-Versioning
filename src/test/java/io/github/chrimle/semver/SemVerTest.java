@@ -134,6 +134,7 @@ class SemVerTest {
     }
 
     @Test
+    @SuppressWarnings("EqualsWithItself")
     void testSelf() {
       final var self = new SemVer(1, 2, 3);
       assertEquals(0, self.compareTo(self));
