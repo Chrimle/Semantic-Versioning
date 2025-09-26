@@ -30,6 +30,21 @@ class SemVerTest {
       final var updatedSemVer = semVer.incrementVersion(Change.MAJOR);
       assertEquals(1, updatedSemVer.major());
     }
+
+    @Test
+    void testIncrementAtMaxInteger() {
+      final var semVer = new SemVer(Integer.MAX_VALUE, 0, 0);
+      final var exception = assertThrows(ArithmeticException.class, semVer::incrementMajor);
+      assertTrue(exception.getMessage().contains("major"));
+    }
+
+    @Test
+    void testIncrementWithChangeAtMaxInteger() {
+      final var semVer = new SemVer(Integer.MAX_VALUE, 0, 0);
+      final var exception =
+          assertThrows(ArithmeticException.class, () -> semVer.incrementVersion(Change.MAJOR));
+      assertTrue(exception.getMessage().contains("major"));
+    }
   }
 
   @Nested
@@ -55,6 +70,21 @@ class SemVerTest {
       final var updatedSemVer = semVer.incrementVersion(Change.MINOR);
       assertEquals(1, updatedSemVer.minor());
     }
+
+    @Test
+    void testIncrementAtMaxInteger() {
+      final var semVer = new SemVer(0, Integer.MAX_VALUE, 0);
+      final var exception = assertThrows(ArithmeticException.class, semVer::incrementMinor);
+      assertTrue(exception.getMessage().contains("minor"));
+    }
+
+    @Test
+    void testIncrementWithChangeAtMaxInteger() {
+      final var semVer = new SemVer(0, Integer.MAX_VALUE, 0);
+      final var exception =
+          assertThrows(ArithmeticException.class, () -> semVer.incrementVersion(Change.MINOR));
+      assertTrue(exception.getMessage().contains("minor"));
+    }
   }
 
   @Nested
@@ -79,6 +109,21 @@ class SemVerTest {
       final var semVer = new SemVer(0, 0, 0);
       final var updatedSemVer = semVer.incrementVersion(Change.PATCH);
       assertEquals(1, updatedSemVer.patch());
+    }
+
+    @Test
+    void testIncrementAtMaxInteger() {
+      final var semVer = new SemVer(0, 0, Integer.MAX_VALUE);
+      final var exception = assertThrows(ArithmeticException.class, semVer::incrementPatch);
+      assertTrue(exception.getMessage().contains("patch"));
+    }
+
+    @Test
+    void testIncrementWithChangeAtMaxInteger() {
+      final var semVer = new SemVer(0, 0, Integer.MAX_VALUE);
+      final var exception =
+          assertThrows(ArithmeticException.class, () -> semVer.incrementVersion(Change.PATCH));
+      assertTrue(exception.getMessage().contains("patch"));
     }
   }
 

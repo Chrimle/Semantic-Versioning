@@ -2,7 +2,7 @@ package io.github.chrimle.semver;
 
 import static io.github.chrimle.exceptionfactory.ExceptionFactory.illegalArgumentOf;
 import static io.github.chrimle.exceptionfactory.MessageTemplates.OneArgTemplate.*;
-import static io.github.chrimle.exceptionfactory.MessageTemplates.TwoArgTemplate.MUST_BE_AT_LEAST;
+import static io.github.chrimle.exceptionfactory.MessageTemplates.TwoArgTemplate.*;
 
 import io.github.chrimle.exceptionfactory.ExceptionBuilder;
 import org.apiguardian.api.API;
@@ -47,6 +47,9 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    * @return the new {@code SemVer}.
    * @since 1.0.0
    * @throws IllegalArgumentException if {@code change} is {@code null}.
+   * @throws ArithmeticException if the current {@code major}, {@code minor} or {@code patch}
+   *     version is equal to {@value Integer#MAX_VALUE} and the provided {@code change} would
+   *     increment that version, causing an <em>integer overflow</em>.
    */
   @Contract("null -> fail")
   public SemVer incrementVersion(final Change change) {
@@ -63,10 +66,18 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    *
    * @since 1.0.0
    * @return the new {@code SemVer}.
+   * @throws ArithmeticException if <em>this</em> {@code major} is equal to {@value
+   *     Integer#MAX_VALUE}, which would cause an <em>integer overflow</em> when creating the new
+   *     {@code SemVer}.
    */
   @NotNull
   @Contract(" -> new")
   public SemVer incrementMajor() {
+    if (major == Integer.MAX_VALUE) {
+      throw new ArithmeticException(
+          "The next `SemVer` cannot be created with a `major` greater than `Integer.MAX_VALUE` (%d)"
+              .formatted(Integer.MAX_VALUE));
+    }
     return new SemVer(major + 1, 0, 0);
   }
 
@@ -75,10 +86,18 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    *
    * @since 1.0.0
    * @return the new {@code SemVer}.
+   * @throws ArithmeticException if <em>this</em> {@code minor} is equal to {@value
+   *     Integer#MAX_VALUE}, which would cause an <em>integer overflow</em> when creating the new
+   *     {@code SemVer}.
    */
   @NotNull
   @Contract(" -> new")
   public SemVer incrementMinor() {
+    if (minor == Integer.MAX_VALUE) {
+      throw new ArithmeticException(
+          "The next `SemVer` cannot be created with a `minor` greater than `Integer.MAX_VALUE` (%d)"
+              .formatted(Integer.MAX_VALUE));
+    }
     return new SemVer(major, minor + 1, 0);
   }
 
@@ -87,10 +106,18 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    *
    * @since 1.0.0
    * @return the new {@code SemVer}.
+   * @throws ArithmeticException if <em>this</em> {@code patch} is equal to {@value
+   *     Integer#MAX_VALUE}, which would cause an <em>integer overflow</em> when creating the new
+   *     {@code SemVer}.
    */
   @NotNull
   @Contract(" -> new")
   public SemVer incrementPatch() {
+    if (patch == Integer.MAX_VALUE) {
+      throw new ArithmeticException(
+          "The next `SemVer` cannot be created with a `patch` greater than `Integer.MAX_VALUE` (%d)"
+              .formatted(Integer.MAX_VALUE));
+    }
     return new SemVer(major, minor, patch + 1);
   }
 
