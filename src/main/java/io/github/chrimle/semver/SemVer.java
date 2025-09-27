@@ -34,6 +34,7 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    * @throws IllegalArgumentException if {@link #patch} is less than {@code 0}.
    * @since 1.0.0
    */
+  @API(status = API.Status.STABLE, since = "1.2.0")
   public SemVer {
     if (major < 0) throw illegalArgumentOf("major", MUST_BE_AT_LEAST, "0");
     if (minor < 0) throw illegalArgumentOf("minor", MUST_BE_AT_LEAST, "0");
@@ -51,6 +52,7 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    *     version is equal to {@value Integer#MAX_VALUE} and the provided {@code change} would
    *     increment that version, causing an <em>integer overflow</em>.
    */
+  @API(status = API.Status.STABLE, since = "1.2.0")
   @Contract("null -> fail")
   public SemVer incrementVersion(final Change change) {
     if (change == null) throw illegalArgumentOf("change", MUST_NOT_BE_NULL);
@@ -70,6 +72,7 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    *     Integer#MAX_VALUE}, which would cause an <em>integer overflow</em> when creating the new
    *     {@code SemVer}.
    */
+  @API(status = API.Status.STABLE, since = "1.2.0")
   @NotNull
   @Contract(" -> new")
   public SemVer incrementMajor() {
@@ -90,6 +93,7 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    *     Integer#MAX_VALUE}, which would cause an <em>integer overflow</em> when creating the new
    *     {@code SemVer}.
    */
+  @API(status = API.Status.STABLE, since = "1.2.0")
   @NotNull
   @Contract(" -> new")
   public SemVer incrementMinor() {
@@ -110,6 +114,7 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    *     Integer#MAX_VALUE}, which would cause an <em>integer overflow</em> when creating the new
    *     {@code SemVer}.
    */
+  @API(status = API.Status.STABLE, since = "1.2.0")
   @NotNull
   @Contract(" -> new")
   public SemVer incrementPatch() {
@@ -128,6 +133,7 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    * @return the formatted {@code String}.
    * @since 1.0.0
    */
+  @API(status = API.Status.STABLE, since = "1.2.0")
   @Contract(pure = true)
   @NotNull
   public String toCompleteVersionString() {
@@ -149,6 +155,7 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    * @return the formatted {@code String}.
    * @since 1.0.0
    */
+  @API(status = API.Status.STABLE, since = "1.2.0")
   @NotNull
   public String toShortVersionString() {
     if (patch > 0) {
@@ -166,6 +173,7 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    * @throws NullPointerException if {@code other} is {@code null}.
    * @since 1.1.0
    */
+  @API(status = API.Status.STABLE, since = "1.2.0")
   @Override
   public int compareTo(final SemVer other) {
     if (other == null) {
