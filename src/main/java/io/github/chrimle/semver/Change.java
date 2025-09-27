@@ -15,17 +15,20 @@ public enum Change {
    *
    * <p><em>... when you make incompatible API changes.</em>
    */
+  @API(status = API.Status.STABLE, since = "1.2.0")
   MAJOR,
   /**
    * <strong>MINOR</strong> change.
    *
    * <p><em>... when you add functionality in a backward compatible manner.</em>
    */
+  @API(status = API.Status.STABLE, since = "1.2.0")
   MINOR,
   /**
    * <strong>PATCH</strong> change.
    *
    * <p><em>... when you make backward compatible bug fixes.</em>
    */
+  @API(status = API.Status.STABLE, since = "1.2.0")
   PATCH
 }
