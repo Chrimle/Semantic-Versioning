@@ -7,7 +7,7 @@
     <!-- === Project Coordinates === -->
     <groupId>io.github.chrimle</groupId>
     <artifactId>semantic-versioning</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <packaging>jar</packaging>
 
     <!-- === Project Metadata === -->
