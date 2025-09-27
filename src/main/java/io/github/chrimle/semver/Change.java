@@ -11,23 +11,47 @@ import org.apiguardian.api.API;
 @API(status = API.Status.STABLE, since = "1.0.1")
 public enum Change {
   /**
-   * <strong>MAJOR</strong> change.
+   * <strong>Definition</strong>
    *
-   * <p><em>... when you make incompatible API changes.</em>
+   * <blockquote>
+   *
+   * <em>"MAJOR version when you make incompatible API changes."</em>
+   *
+   * <p><a href="https://semver.org/#summary">Semantic Versioning: Summary</a>
+   *
+   * </blockquote>
+   *
+   * @since 1.0.0
    */
   @API(status = API.Status.STABLE, since = "1.2.0")
   MAJOR,
   /**
-   * <strong>MINOR</strong> change.
+   * <strong>Definition</strong>
    *
-   * <p><em>... when you add functionality in a backward compatible manner.</em>
+   * <blockquote>
+   *
+   * <em>"MINOR version when you add functionality in a backward compatible manner."</em>
+   *
+   * <p><a href="https://semver.org/#summary">Semantic Versioning: Summary</a>
+   *
+   * </blockquote>
+   *
+   * @since 1.0.0
    */
   @API(status = API.Status.STABLE, since = "1.2.0")
   MINOR,
   /**
-   * <strong>PATCH</strong> change.
+   * <strong>Definition</strong>
    *
-   * <p><em>... when you make backward compatible bug fixes.</em>
+   * <blockquote>
+   *
+   * <em>"PATCH version when you make backward compatible bug fixes."</em>
+   *
+   * <p><a href="https://semver.org/#summary">Semantic Versioning: Summary</a>
+   *
+   * </blockquote>
+   *
+   * @since 1.0.0
    */
   @API(status = API.Status.STABLE, since = "1.2.0")
   PATCH
