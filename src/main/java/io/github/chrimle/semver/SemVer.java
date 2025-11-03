@@ -70,7 +70,8 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    */
   @API(status = API.Status.STABLE, since = "1.2.0")
   @Contract("null -> fail; !null -> new")
-  public SemVer incrementVersion(final Change change) {
+  public SemVer incrementVersion(final Change change)
+      throws ArithmeticException, IllegalArgumentException {
     if (change == null) throw illegalArgumentOf("change", MUST_NOT_BE_NULL);
     return switch (change) {
       case MAJOR -> incrementMajor();
@@ -91,7 +92,7 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
   @API(status = API.Status.STABLE, since = "1.2.0")
   @NotNull
   @Contract(" -> new")
-  public SemVer incrementMajor() {
+  public SemVer incrementMajor() throws ArithmeticException {
     if (major == Integer.MAX_VALUE) {
       throw new ArithmeticException(
           "The next `SemVer` cannot be created with a `major` greater than `Integer.MAX_VALUE` (%d)"
@@ -112,7 +113,7 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
   @API(status = API.Status.STABLE, since = "1.2.0")
   @NotNull
   @Contract(" -> new")
-  public SemVer incrementMinor() {
+  public SemVer incrementMinor() throws ArithmeticException {
     if (minor == Integer.MAX_VALUE) {
       throw new ArithmeticException(
           "The next `SemVer` cannot be created with a `minor` greater than `Integer.MAX_VALUE` (%d)"
@@ -133,7 +134,7 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
   @API(status = API.Status.STABLE, since = "1.2.0")
   @NotNull
   @Contract(" -> new")
-  public SemVer incrementPatch() {
+  public SemVer incrementPatch() throws ArithmeticException {
     if (patch == Integer.MAX_VALUE) {
       throw new ArithmeticException(
           "The next `SemVer` cannot be created with a `patch` greater than `Integer.MAX_VALUE` (%d)"
