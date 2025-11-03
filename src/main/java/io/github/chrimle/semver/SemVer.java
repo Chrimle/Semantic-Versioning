@@ -191,7 +191,7 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
    */
   @API(status = API.Status.STABLE, since = "1.2.0")
   @Override
-  public int compareTo(final SemVer other) {
+  public int compareTo(final SemVer other) throws NullPointerException {
     if (other == null) {
       throw ExceptionBuilder.of(NullPointerException.class)
           .setMessage(MUST_NOT_BE_NULL, "other")
