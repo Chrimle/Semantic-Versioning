@@ -20,6 +20,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class SemVerTest {
 
@@ -210,31 +212,40 @@ class SemVerTest {
       assertEquals(0, right.compareTo(left));
     }
 
-    @Test
-    void testUnequalMajor() {
-      final var left = new SemVer(3, 2, 3);
+    @ParameterizedTest
+    @CsvSource(
+        value =
+            """
+            2,2,3
+            1,3,3
+            1,2,4
+            2,0,0
+            1,3,0
+            """)
+    void testLarger(final int major, final int minor, final int patch) {
+      final var left = new SemVer(major, minor, patch);
       final var right = new SemVer(1, 2, 3);
       assertEquals(left.compareTo(right), -right.compareTo(left));
       assertEquals(1, left.compareTo(right));
       assertEquals(-1, right.compareTo(left));
     }
 
-    @Test
-    void testUnequalMinor() {
-      final var left = new SemVer(1, 3, 3);
+    @ParameterizedTest
+    @CsvSource(
+        value =
+            """
+            0,2,3
+            1,1,3
+            1,2,2
+            0,9,9
+            1,1,9
+            """)
+    void testSmaller(final int major, final int minor, final int patch) {
+      final var left = new SemVer(major, minor, patch);
       final var right = new SemVer(1, 2, 3);
       assertEquals(left.compareTo(right), -right.compareTo(left));
-      assertEquals(1, left.compareTo(right));
-      assertEquals(-1, right.compareTo(left));
-    }
-
-    @Test
-    void testUnequalPatch() {
-      final var left = new SemVer(1, 2, 4);
-      final var right = new SemVer(1, 2, 3);
-      assertEquals(left.compareTo(right), -right.compareTo(left));
-      assertEquals(1, left.compareTo(right));
-      assertEquals(-1, right.compareTo(left));
+      assertEquals(-1, left.compareTo(right));
+      assertEquals(1, right.compareTo(left));
     }
   }
 }
