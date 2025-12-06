@@ -72,7 +72,6 @@
         <!-- === Spotless === -->
         <spotless.check.skip>false</spotless.check.skip>
         <!-- === Dependency Versions === -->
-        <apiguardian-api.version>1.1.2</apiguardian-api.version>
         <jetbrains-annotations.version>26.0.2</jetbrains-annotations.version>
         <exception-factory.version>0.4.1</exception-factory.version>
     </properties>
@@ -90,7 +89,6 @@
         <dependency>
             <groupId>org.apiguardian</groupId>
             <artifactId>apiguardian-api</artifactId>
-            <version>${apiguardian-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
