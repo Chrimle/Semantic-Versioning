@@ -73,7 +73,7 @@
         <spotless.check.skip>false</spotless.check.skip>
         <!-- === Dependency Versions === -->
         <jetbrains-annotations.version>26.1.0</jetbrains-annotations.version>
-        <exception-factory.version>0.4.1</exception-factory.version>
+        <exception-factory.version>0.5.0</exception-factory.version>
     </properties>
 
     <!-- === Dependency Management === -->
