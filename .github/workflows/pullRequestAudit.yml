@@ -17,21 +17,8 @@ jobs:
     name: Label Auditor
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-    steps:
-      - uses: actions/github-script@v6
-        with:
-          script: |
-            const categoriesRequiringSemanticVersion = ['feat', 'bug', 'javadocs'];
-            const requiredCategories = ['feat', 'bug', 'documentation', 'test', 'dependencies', 'meta', 'javadocs', 'refactor'];
-            const semanticVersions = ['MAJOR', 'MINOR', 'PATCH'];
+      pull-requests: read
 
-            const labels = context.payload.pull_request.labels;
-            if (labels.filter(label => requiredCategories.includes(label.name)).length == 0) {
-              throw new Error(`Pull Request requires one of the following labels: ${requiredCategories.join(', ')}`);
-            }
-            if (labels.filter(label => categoriesRequiringSemanticVersion.includes(label.name)).length > 0) {
-              if (labels.filter(label => semanticVersions.includes(label.name)).length == 0) {
-                throw new Error(`Pull Request requires a 'Semantic version'-label for the following labels: ${categoriesRequiringSemanticVersion.join(', ')}`);
-              }
-            }
+    steps:
+      - name: Label Auditor
+        uses: Chrimle/Label-Auditor@d381b18fa2a783b1c62c7cb6c40c8e347dc6cad8 # v0.1.0
