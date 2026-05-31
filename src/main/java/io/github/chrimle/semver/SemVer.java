@@ -144,6 +144,26 @@ public record SemVer(int major, int minor, int patch) implements Comparable<SemV
   }
 
   /**
+   * Returns whether this {@link SemVer} is considered <em>stable</em> according to <a
+   * href="https://semver.org/#spec-item-4">SemVer Spec §4</a>:
+   *
+   * <blockquote>
+   *
+   * Major version zero (0.y.z) is for initial development. Anything MAY change at any time. The
+   * public API SHOULD NOT be considered stable.
+   *
+   * </blockquote>
+   *
+   * @return whether <em>this</em> {@link SemVer} is considered a <em>stable</em> release.
+   * @since 1.4.0
+   */
+  @API(status = API.Status.STABLE, since = "1.4.0")
+  @Contract(pure = true)
+  public boolean isStable() {
+    return major != 0;
+  }
+
+  /**
    * Returns <em>this</em> {@link SemVer} as a {@code String} in the format: {@code
    * v{major}.{minor}.{patch}}.
    *

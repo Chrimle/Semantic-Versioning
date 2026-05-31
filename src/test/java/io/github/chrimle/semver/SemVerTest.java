@@ -248,4 +248,37 @@ class SemVerTest {
       assertEquals(1, right.compareTo(left));
     }
   }
+
+  @Nested
+  class StableTests {
+
+    @ParameterizedTest
+    @CsvSource(
+        value =
+            """
+            0,0,0
+            0,0,1
+            0,1,0
+            0,1,1
+            """)
+    void testNonStable(final int major, final int minor, final int patch) {
+      final var semVer = new SemVer(major, minor, patch);
+      assertFalse(
+          semVer.isStable(), "Expected %s to be non-stable, but is not...".formatted(semVer));
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        value =
+            """
+            1,0,0
+            1,0,1
+            1,1,0
+            1,1,1
+            """)
+    void testStable(final int major, final int minor, final int patch) {
+      final var semVer = new SemVer(major, minor, patch);
+      assertTrue(semVer.isStable(), "Expected %s to be stable, but is not...".formatted(semVer));
+    }
+  }
 }
