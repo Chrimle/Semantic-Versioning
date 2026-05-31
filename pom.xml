@@ -72,7 +72,6 @@
         <!-- === Spotless === -->
         <spotless.check.skip>false</spotless.check.skip>
         <!-- === Dependency Versions === -->
-        <jetbrains-annotations.version>26.1.0</jetbrains-annotations.version>
         <exception-factory.version>0.5.0</exception-factory.version>
     </properties>
 
@@ -93,7 +92,6 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>${jetbrains-annotations.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
