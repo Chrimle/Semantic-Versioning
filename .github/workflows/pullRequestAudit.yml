@@ -10,14 +10,14 @@ on:
       - synchronize
       - ready_for_review
 
-permissions:
-  contents: read
+permissions: { }
 
 jobs:
   Label-Auditor:
     name: Label Auditor
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
     steps:
       - uses: actions/github-script@v6
         with:
