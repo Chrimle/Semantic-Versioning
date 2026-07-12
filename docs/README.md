@@ -6,7 +6,7 @@
 <dependency>
     <groupId>io.github.chrimle</groupId>
     <artifactId>semantic-versioning</artifactId>
-    <version>1.4.0</version>
+    <version>1.5.0</version>
 </dependency>
 ```
 ### Available on...
