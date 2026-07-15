@@ -18,6 +18,7 @@ package io.github.chrimle.semver;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Objects;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -53,7 +54,7 @@ class SemVerTest {
     void testIncrementAtMaxInteger() {
       final var semVer = new SemVer(Integer.MAX_VALUE, 0, 0);
       final var exception = assertThrows(ArithmeticException.class, semVer::incrementMajor);
-      assertTrue(exception.getMessage().contains("major"));
+      assertTrue(getExceptionMessage(exception).contains("major"));
     }
 
     @Test
@@ -61,7 +62,7 @@ class SemVerTest {
       final var semVer = new SemVer(Integer.MAX_VALUE, 0, 0);
       final var exception =
           assertThrows(ArithmeticException.class, () -> semVer.incrementVersion(Change.MAJOR));
-      assertTrue(exception.getMessage().contains("major"));
+      assertTrue(getExceptionMessage(exception).contains("major"));
     }
   }
 
@@ -93,7 +94,7 @@ class SemVerTest {
     void testIncrementAtMaxInteger() {
       final var semVer = new SemVer(0, Integer.MAX_VALUE, 0);
       final var exception = assertThrows(ArithmeticException.class, semVer::incrementMinor);
-      assertTrue(exception.getMessage().contains("minor"));
+      assertTrue(getExceptionMessage(exception).contains("minor"));
     }
 
     @Test
@@ -101,7 +102,7 @@ class SemVerTest {
       final var semVer = new SemVer(0, Integer.MAX_VALUE, 0);
       final var exception =
           assertThrows(ArithmeticException.class, () -> semVer.incrementVersion(Change.MINOR));
-      assertTrue(exception.getMessage().contains("minor"));
+      assertTrue(getExceptionMessage(exception).contains("minor"));
     }
   }
 
@@ -133,7 +134,7 @@ class SemVerTest {
     void testIncrementAtMaxInteger() {
       final var semVer = new SemVer(0, 0, Integer.MAX_VALUE);
       final var exception = assertThrows(ArithmeticException.class, semVer::incrementPatch);
-      assertTrue(exception.getMessage().contains("patch"));
+      assertTrue(getExceptionMessage(exception).contains("patch"));
     }
 
     @Test
@@ -141,7 +142,7 @@ class SemVerTest {
       final var semVer = new SemVer(0, 0, Integer.MAX_VALUE);
       final var exception =
           assertThrows(ArithmeticException.class, () -> semVer.incrementVersion(Change.PATCH));
-      assertTrue(exception.getMessage().contains("patch"));
+      assertTrue(getExceptionMessage(exception).contains("patch"));
     }
   }
 
@@ -190,6 +191,7 @@ class SemVerTest {
 
   @Nested
   class CompareToTests {
+    @SuppressWarnings({"DataFlowIssue", "NullAway"})
     @Test
     void testNull() {
       final var semVer = new SemVer(1, 2, 3);
@@ -280,5 +282,9 @@ class SemVerTest {
       final var semVer = new SemVer(major, minor, patch);
       assertTrue(semVer.isStable(), "Expected %s to be stable, but is not...".formatted(semVer));
     }
+  }
+
+  private static String getExceptionMessage(final Exception exception) {
+    return Objects.requireNonNull(exception.getMessage());
   }
 }
