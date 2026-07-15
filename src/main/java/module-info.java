@@ -1,5 +1,3 @@
-import org.jspecify.annotations.NullMarked;
-
 /**
  * Provides classes for representing, comparing and interacting with Semantic Versions.
  *
@@ -33,7 +31,7 @@ import org.jspecify.annotations.NullMarked;
  * @see <a href="https://github.com/Chrimle/Semantic-Versioning">This Semantic-Versioning Project on
  *     GitHub</a>
  */
-@NullMarked
+@org.jspecify.annotations.NullMarked
 module io.github.chrimle.semver {
   // Exports
   exports io.github.chrimle.semver;
